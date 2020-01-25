@@ -13,12 +13,23 @@ timeline will give update details.
 logging.basicConfig(level=logging.INFO)  # change to DEBUG to see log all updates
 
 # create trading instance
-username = os.environ.get('username')
-trading = betfairlightweight.APIClient(username)
+username = 'travisavery82@gmail.com'
+password = 'C@mpb3ll2010'
+app_key='7sd08M7xLkS2Zujv'
+
+
+# create trading instance
+trading = betfairlightweight.APIClient(username=username, password=password, app_key=app_key)
 trading.login()
 
 # update
-event_ids = [28369618]
+# event_ids = [28369618, 7]
+event_ids = []
+for evnt_id in trading.betting.list_event_types():
+    event_ids.append(evnt_id.event_type.id)
+
+# print(event_ids)
+# exit(0)
 
 # score request (provide list / returns list)
 scores = trading.in_play_service.get_scores(

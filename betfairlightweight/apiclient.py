@@ -22,7 +22,7 @@ class APIClient(BaseClient):
             lightweight=lightweight
         )
 
-        self.login = endpoints.Login(self)
+        self.login = endpoints.LoginInteractive(self) #endpoints.Login(self)
         self.login_interactive = endpoints.LoginInteractive(self)
         self.keep_alive = endpoints.KeepAlive(self)
         self.logout = endpoints.Logout(self)

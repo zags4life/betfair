@@ -11,6 +11,9 @@ class EventType(object):
         self.id = id
         self.name = name
 
+    def __str__(self):
+        return "id: {0.id:>10} name: '{0.name}'".format(self)
+
 
 class EventTypeResult(BaseResource):
     """
@@ -23,6 +26,9 @@ class EventTypeResult(BaseResource):
         self.market_count = kwargs.get('marketCount')
         self.event_type = EventType(**kwargs.get('eventType'))
 
+    def __str__(self):
+        return '{0.event_type} markets: {0.market_count}'.format(self)
+
 
 class Competition(object):
     """
@@ -34,6 +40,8 @@ class Competition(object):
         self.id = id
         self.name = name
 
+    def __str__(self):
+        return '{0.id} {0.name}'.format(self)
 
 class CompetitionResult(BaseResource):
     """
@@ -48,6 +56,8 @@ class CompetitionResult(BaseResource):
         self.competition_region = kwargs.get('competitionRegion')
         self.competition = Competition(**kwargs.get('competition'))
 
+    def __str__(self):
+        return '{0.market_count} {0.competition_region} {0.competition}'.format(self)
 
 class TimeRange(object):
     """
@@ -59,6 +69,8 @@ class TimeRange(object):
         self._from = BaseResource.strip_datetime(kwargs.get('from'))
         self.to = BaseResource.strip_datetime(kwargs.get('to'))
 
+    def __str__(self):
+        return '{0._from} {0.to}'.format(self)
 
 class TimeRangeResult(BaseResource):
     """
@@ -71,6 +83,8 @@ class TimeRangeResult(BaseResource):
         self.market_count = kwargs.get('marketCount')
         self.time_range = TimeRange(**kwargs.get('timeRange'))
 
+    def __str__(self):
+        return '{0.market_count} {0.time_range}'.format(self)
 
 class Event(object):
     """
@@ -90,6 +104,8 @@ class Event(object):
         self.name = name
         self.venue = venue
 
+    def __str__(self):
+        return '{0.id} {0.name} {0.venue} {0.open_date} {0.time_zone} {0.country_code}'.format(self)
 
 class EventResult(BaseResource):
     """
@@ -102,6 +118,8 @@ class EventResult(BaseResource):
         self.market_count = kwargs.get('marketCount')
         self.event = Event(**kwargs.get('event'))
 
+    def __str__(self):
+        return '{0.market_count} {0.event}'.format(self)
 
 class MarketTypeResult(BaseResource):
     """
@@ -114,6 +132,8 @@ class MarketTypeResult(BaseResource):
         self.market_count = kwargs.get('marketCount')
         self.market_type = kwargs.get('marketType')
 
+    def __str__(self):
+        return '{0.market_count} {0.market_type}'.format(self)
 
 class CountryResult(BaseResource):
     """
@@ -126,6 +146,8 @@ class CountryResult(BaseResource):
         self.market_count = kwargs.get('marketCount')
         self.country_code = kwargs.get('countryCode')
 
+    def __str__(self):
+        return '{0.market_count} {0.country_code}'.format(self)
 
 class VenueResult(BaseResource):
     """
@@ -138,6 +160,8 @@ class VenueResult(BaseResource):
         self.market_count = kwargs.get('marketCount')
         self.venue = kwargs.get('venue')
 
+    def __str__(self):
+        return '{0.market_count} {0.time_range}'.format(self)
 
 class LineRangeInfo(object):
     """
@@ -294,7 +318,7 @@ class PriceSize(Slotable):
 
     def __str__(self):
         return 'Price: %s Size: %s' % (self.price, self.size)
-
+    __repr__=__str__
 
 class RunnerBookSP(object):
     """
